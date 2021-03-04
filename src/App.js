@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { Switch, Route } from 'react-router-dom';
+import Sidebar from './templates/Sidebar';
+import Transactions from './templates/Pages/transaction';
+import Costumer from './templates/Pages/costumer';
+import CostumerById from './templates/Pages/slug/costumer';
+import Categorie from './templates/Pages/categorie';
+import Dashboard from './templates/Pages/Dashboard';
+import CreateCostumers from './components/costumers/create';
+import MainHead from './templates/Main/main-head';
 
+const App = () => (
+	<div className='min-h-screen bg-full-dark flex flex-wrap'>
+		<Sidebar />
+		<div className='w-5/6 __main relative'>
+			<MainHead />
+			<div className='mx-6 relative'>
+				<Switch>
+					<Route path='/' exact component={Dashboard} />
+					<Route path='/transactions' exact component={Transactions} />
+					<Route path='/categories' exact component={Categorie} />
+					<Route path='/costumers' exact component={Costumer} />
+					<Route path='/costumers/view/:id' exact component={CostumerById} />
+					<Route path='/costumers/create' component={CreateCostumers} />
+				</Switch>
+			</div>
+		</div>
+	</div>
+);
 export default App;
